@@ -17,6 +17,7 @@
 
 ## ✨ Features
 
+### 🎮 Core Features
 - 🎮 **Authentic Pokédex Design** - Classic red Pokédex styling with animated elements
 - 🔍 **Real-time Search** - Search Pokémon by name or National Pokédex number
 - 📊 **Detailed Stats** - View base stats with color-coded visual bars
@@ -25,6 +26,17 @@
 - 📱 **Fully Responsive** - Optimized for mobile, tablet, and desktop
 - ⚡ **Lightning Fast** - Built with Vite for instant hot module replacement
 - 🌙 **Modern UI** - Dark themed background with glassmorphism effects
+
+### ✨ Enhanced Features
+- ⭐ **Favorites System** - Save your favorite Pokémon with localStorage persistence
+- 🔗 **Evolution Chain** - View and navigate complete evolution chains
+- ⚔️ **Move List** - Display first 20 moves each Pokémon can learn
+- ⚖️ **Compare Mode** - Compare up to 3 Pokémon side-by-side with stats
+- ✨ **Shiny Sprites** - Toggle between normal and shiny forms
+- 🔊 **Pokémon Cries** - Listen to authentic Pokémon cries from PokéAPI
+- 🎵 **Sound Effects** - Interactive UI sounds with toggle control
+- 🌐 **Multi-language** - English, Spanish (Español), and Japanese (日本語) support
+- 📑 **Tabbed Interface** - Organized Info/Stats/More tabs for better UX
 
 ## 🎯 Demo
 
@@ -81,21 +93,24 @@ Your site will be live at: `https://yourusername.github.io/PokeSearch/`
 
 ## 📦 Tech Stack
 
-- **Frontend Framework:** [React 18](https://reactjs.org/)
+- **Frontend Framework:** [React 18](https://reactjs.org/) with Hooks
 - **Build Tool:** [Vite](https://vitejs.dev/)
-- **HTTP Client:** [Axios](https://axios-http.com/)
-- **API:** [PokéAPI](https://pokeapi.co/)
+- **API:** [PokéAPI](https://pokeapi.co/) (v2)
 - **Styling:** Custom CSS with Flexbox & Grid
+- **State Management:** React Hooks (useState, useEffect, useRef)
+- **Data Persistence:** localStorage API
 - **Deployment:** GitHub Pages
+- **Architecture:** Component-based with custom hooks
 
 ## 🎨 Design Features
 
 ### Pokédex Interface
 - Classic red Pokédex body with authentic styling
-- Animated blue light indicator
+- Animated blue light indicator with pulse effect
 - Functional D-pad and action buttons (decorative)
 - Green screen display with scrollable content
 - Speaker grille details
+- Tab-based navigation system
 
 ### Responsive Design
 - **Mobile** (≤480px): Compact layout optimized for touch
@@ -109,67 +124,175 @@ Each Pokémon type has its official color:
 - 🕊️ Flying • 🔮 Psychic • 🐛 Bug • 🪨 Rock
 - 👻 Ghost • 🐉 Dragon • 🌑 Dark • ⚙️ Steel • 🧚 Fairy
 
-## 📖 Usage
+## 📖 Usage Guide
 
-1. **Search for a Pokémon:**
-   - Type the Pokémon name (e.g., "pikachu")
-   - Or enter the Pokédex number (e.g., "25")
-   - Press Enter or click the search button
+### 1. Search for a Pokémon
+- Type the Pokémon name (e.g., "pikachu")
+- Or enter the Pokédex number (e.g., "25")
+- Press Enter or click the search button (→)
 
-2. **View Details:**
-   - Pokémon name and National Pokédex number
-   - Official artwork with floating animation
-   - Type(s) with color-coded badges
-   - Height, Weight, and Base Experience
-   - Base stats with visual bars
-   - Abilities (including hidden abilities)
+### 2. Language Selection
+- Click **EN** for English
+- Click **ES** for Spanish (Español)
+- Click **日本** for Japanese (日本語)
 
-3. **Navigate:**
-   - Search for different Pokémon anytime
-   - Scroll through stats on smaller screens
+### 3. Control Panel
+- 🔊 **Sound Toggle** - Enable/disable all sounds
+- ❤️ **Favorite** - Add to favorites list
+- ⚖️ **Compare** - Add to comparison (max 3)
+- ✨ **Shiny** - Toggle shiny sprite
+- 🔊 **Play Cry** - Hear Pokémon's cry
+
+### 4. Tab Navigation
+
+#### Info Tab
+- Official artwork (normal/shiny)
+- Type badges
+- Height and weight
+- Abilities (including hidden)
+
+#### Stats Tab
+- Base stats with color-coded bars:
+  - 🟢 Green (>100): Excellent
+  - 🟡 Yellow (60-100): Good
+  - 🔴 Red (<60): Below average
+- HP, Attack, Defense, Sp. Atk, Sp. Def, Speed
+
+#### More Tab
+- **Evolution Chain**: Click to navigate between evolutions
+- **Move List**: First 20 moves
+- **Compare List**: View compared Pokémon stats
+
+### 5. Favorites System
+- Add Pokémon to favorites with ❤️ button
+- Favorites persist across sessions
+- View favorites on welcome screen
+- Click favorite to search instantly
 
 ## 🗂️ Project Structure
 
 ```
 pokesearch-vite/
 ├── public/
-│   └── favicon.ico
+│   ├── pokeball.png          # Pokéball icon
+│   └── favicon.ico            # Site favicon
 ├── src/
-│   ├── App.jsx           # Main component with Pokédex logic
-│   ├── App.css           # Pokédex styling and animations
-│   ├── main.jsx          # React entry point
-│   └── index.css         # Global styles
-├── index.html            # HTML template
-├── vite.config.js        # Vite configuration
-├── package.json          # Dependencies and scripts
-└── README.md            # You are here!
+│   ├── components/            # Reusable UI components
+│   │   ├── PokedexHeader.jsx     # Top section with lights
+│   │   ├── ControlPanel.jsx      # Language & sound controls
+│   │   ├── SearchBar.jsx         # Search input
+│   │   ├── ErrorMessage.jsx      # Error display
+│   │   ├── LoadingScreen.jsx     # Loading state
+│   │   ├── PokemonInfo.jsx       # Info tab content
+│   │   ├── PokemonStats.jsx      # Stats tab content
+│   │   ├── PokemonMore.jsx       # More tab content
+│   │   └── WelcomeScreen.jsx     # Welcome & favorites
+│   ├── hooks/                 # Custom React hooks
+│   │   ├── usePokemonData.js     # Pokemon data fetching
+│   │   └── useAudio.js           # Audio management
+│   ├── App.jsx                # Main application component
+│   ├── App.css                # Pokédex styling
+│   ├── config.js              # Constants & configuration
+│   ├── utils.js               # Helper functions
+│   ├── main.jsx               # React entry point
+│   └── index.css              # Global styles
+├── index.html                 # HTML template
+├── vite.config.js             # Vite configuration
+├── package.json               # Dependencies
+└── README.md                  # Documentation
 ```
 
 ## 🎮 API Reference
 
 This project uses the [PokéAPI](https://pokeapi.co/) - a free RESTful Pokémon API.
 
-**Endpoint Used:**
+**Main Endpoints Used:**
 ```
 GET https://pokeapi.co/api/v2/pokemon/{id or name}
+GET https://pokeapi.co/api/v2/pokemon-species/{id or name}
+GET https://pokeapi.co/api/v2/evolution-chain/{id}
 ```
 
-**Example Response:** Returns Pokémon data including stats, types, abilities, sprites, and more.
+**Data Retrieved:**
+- Pokémon stats, types, abilities, sprites
+- Species information and flavor text
+- Evolution chains
+- Move lists
+- Pokémon cries (audio)
+
+## 🎵 Audio Features
+
+### Pokémon Cries
+- Authentic cries from PokéAPI
+- Automatic playback on Pokémon load
+- Manual playback with 🔊 button
+- Adjustable volume (10% default)
+
+### UI Sound Effects
+- Click sounds for button interactions
+- Toggle on/off with control panel
+- Non-intrusive audio feedback
+
+## 🌍 Internationalization
+
+The app supports three languages with complete translations:
+
+| Language | Code | Coverage |
+|----------|------|----------|
+| English | en | 100% |
+| Español | es | 100% |
+| 日本語 | ja | 100% |
+
+All UI elements, labels, and messages are translated, including:
+- Search prompts
+- Tab names
+- Stat labels
+- Error messages
+- Welcome text
+
+### Code Architecture
+
+The project follows modern React best practices:
+
+- **Component-based**: Modular, reusable components
+- **Custom Hooks**: Separated logic from UI
+- **Configuration**: Centralized constants
+- **Utilities**: Pure helper functions
+- **Clean Code**: Well-documented and organized
+
+### Key Technologies
+
+- **React Hooks**: useState, useEffect, useRef
+- **Async/Await**: Modern async handling
+- **Fetch API**: HTTP requests
+- **localStorage**: Data persistence
+- **CSS3**: Advanced animations & transitions
 
 ## 🐛 Known Issues
 
 - None currently! If you find a bug, please [open an issue](https://github.com/VawnDyu/PokeSearch/issues).
 
+## ✅ Completed Enhancements
+
+- [x] ✅ Add Pokémon evolution chain display
+- [x] ✅ Include move list and descriptions
+- [x] ✅ Implement favorites/bookmarks
+- [x] ✅ Add Pokémon comparison feature
+- [x] ✅ Include shiny sprite toggle
+- [x] ✅ Add sound effects and Pokémon cries
+- [x] ✅ Multi-language support (EN/ES/JA)
+
 ## 🔮 Future Enhancements
 
-- [ ] Add Pokémon evolution chain display
-- [ ] Include move list and descriptions
-- [ ] Add search filters (by type, generation, etc.)
-- [ ] Implement favorites/bookmarks
-- [ ] Add Pokémon comparison feature
-- [ ] Include shiny sprite toggle
-- [ ] Add sound effects and animations
-- [ ] Multi-language support
+- [ ] Add more languages (French, German, Korean)
+- [ ] Implement type effectiveness chart
+- [ ] Add Pokémon locations data
+- [ ] Include egg groups and breeding info
+- [ ] Add nature and IV calculator
+- [ ] Implement team builder feature
+- [ ] Add Pokédex completion tracker
+- [ ] Include generation filters in search
+- [ ] Add dark/light theme toggle
 
 ## ⚠️ Disclaimer
 
@@ -199,12 +322,28 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - [PokéAPI](https://pokeapi.co/) for the comprehensive Pokémon data
 - [The Pokémon Company](https://www.pokemon.com/) for the amazing franchise
 - Nintendo, Game Freak, and Creatures Inc. for the original Pokémon games
+- The React and Vite teams for excellent development tools
 - All the contributors who helped improve this project
 
-<!-- ## 📬 Contact
+## 📊 Project Stats
 
-**Your Name** - [@yourtwitter](https://twitter.com/yourtwitter) - your.email@example.com -->
+- **Components**: 9 modular components
+- **Custom Hooks**: 2 reusable hooks
+- **Lines of Code**: ~2000+ lines
+- **Languages Supported**: 3 (EN, ES, JA)
+- **Pokémon Data**: Complete National Pokédex
+- **Features**: 15+ interactive features
+
+---
+
+<div align="center">
+
+**Made with ❤️ by PokéSearch Team**
+
+[![GitHub](https://img.shields.io/badge/GitHub-VawnDyu-181717?style=for-the-badge&logo=github)](https://github.com/VawnDyu)
 
 Project Link: [https://github.com/VawnDyu/PokeSearch](https://github.com/VawnDyu/PokeSearch)
 
----
+⭐ Star this repo if you find it helpful!
+
+</div>
