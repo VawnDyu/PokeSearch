@@ -17,7 +17,6 @@ body {
 
 .app {
   min-height: 100vh;
-  min-width: 100vw;
   width: 100%;
   background: #1a1a1a;
   display: flex;
@@ -266,6 +265,15 @@ body {
 .search-button:disabled {
   background: #95a5a6;
   cursor: not-allowed;
+}
+
+@media (max-width: 410px) {
+  .search-button {
+    display: none;
+  }
+  .search-input {
+    font-size: 0.8rem;
+  }
 }
 
 /* Error Message */
@@ -637,9 +645,14 @@ body {
 }
 
 .pokeball-icon {
-  font-size: 80px;
   margin-bottom: 20px;
   animation: bounce 2s ease-in-out infinite;
+}
+
+.pokeball-img {
+  height: 90px;
+  width: 90px;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
 }
 
 @keyframes bounce {

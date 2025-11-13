@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/PokeSearch/', // Replace with your actual repo name!
+  base: '/PokeSearch/',
   server: {
     port: 5173,
     open: true
